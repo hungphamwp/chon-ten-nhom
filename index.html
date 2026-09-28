@@ -138,8 +138,8 @@ button{font:inherit}
 .ax .why{font-size:13.5px;color:var(--chalk-dim)}
 .ax .meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-size:12.5px;color:var(--chalk-dim)}
 .ax .star{position:absolute;top:12px;right:12px}
-.kinds{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
-@media (max-width:900px){.kinds{grid-template-columns:repeat(2,1fr)}}
+.kinds{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:22px}
+@media (max-width:1000px){.kinds{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:480px){.kinds{grid-template-columns:1fr}}
 .kind{border-top:3px solid var(--sky);padding-top:10px;display:grid;gap:4px}
 .kind b{font-family:var(--display);font-size:19px}
@@ -201,7 +201,7 @@ button{font:inherit}
     <div>
       <p class="hand">Hôm nay quán có gì?</p>
       <h1>Thực đơn <span class="u">tên nhóm</span></h1>
-      <p class="lede">Hơn 110 cái tên cho nhóm Facebook đại chúng của HPB. Tiêu chí: <b>có chút cợt nhả</b>, GenZ, 8x9x hay cô chú U60 đọc <b>đều hiểu</b>, và sau này <b>dẫn sang AI</b> mà không phải đổi tên. Bấm ☆ để gọi món, cuối trang có nút soạn sẵn bài cho follower bình chọn.</p>
+      <p class="lede">Hơn 110 cái tên cho nhóm Facebook <b>dành cho tất cả mọi người</b> của HPB. Tiêu chí: <b>có chút cợt nhả</b>, GenZ, 8x9x hay cô chú U60 đọc <b>đều hiểu</b>, và sau này <b>dẫn sang AI</b> mà không phải đổi tên. Bấm ☆ để gọi món, cuối trang có nút soạn sẵn bài cho follower bình chọn.</p>
     </div>
     <aside class="special" aria-label="Món đặc biệt">
       <p class="hand">Món đặc biệt hôm nay</p>
@@ -243,16 +243,18 @@ button{font:inherit}
     <div class="shead">
       <p class="lbl">Món nâng cấp · cập nhật 28/09</p>
       <h2 id="h-ai">Hôm nay → Mai có AI</h2>
-      <p>Tên chạy được ngay hôm nay, sau này chỉ cần gắn thêm chữ AI mà tên cũ gần như giữ nguyên. Có 4 cách gắn.</p>
+      <p>Tên chạy được ngay hôm nay, sau này chỉ cần gắn thêm chữ AI mà tên cũ gần như giữ nguyên. Có 5 cách gắn. Mặc định chỉ hiện tên hợp với tất cả mọi người.</p>
     </div>
     <div class="kinds">
       <div class="kind"><b>Thêm " AI"</b><span>Tên là một "địa điểm" (xóm, hội, quán), gắn AI nghe như thương hiệu nâng cấp.</span><code>Xóm Lười → Xóm Lười AI</code></div>
       <div class="kind" style="border-color:var(--leaf)"><b>Thêm " Nhờ AI"</b><span>Tên là một mong ước. "Nhờ AI" trả lời câu hỏi "bằng cách nào?".</span><code>Lười Mà Giàu → … Nhờ AI</code></div>
       <div class="kind" style="border-color:var(--tomato)"><b>Thêm " Cùng AI"</b><span>Tên là một cách làm, AI thành bạn đồng hành.</span><code>Làm Nhàn → Làm Nhàn Cùng AI</code></div>
       <div class="kind" style="border-color:var(--sun)"><b>Đổi 1 chữ</b><span>Bẻ tục ngữ, thay đúng một chữ bằng "AI". Người cũ đọc là cười.</span><code>Để Mai Tính → Để AI Tính</code></div>
+      <div class="kind" style="border-color:var(--chalk)"><b>Viết hoa "Ai"</b><span>Tên có sẵn chữ "ai" (người nào). Sau này chỉ viết hoa thành AI, tên không đổi một chữ.</span><code>Ai Cũng Làm Được → AI Cũng…</code></div>
     </div>
     <div class="bar-ctl" style="position:static;border:0;padding:0;margin-bottom:18px">
       <div class="row" id="kindf"></div>
+      <div class="row"><button class="chip" id="allAI" type="button" aria-pressed="true">Chỉ tên cho mọi người</button></div>
     </div>
     <div class="ailist" id="ailist"></div>
   </section>
@@ -299,6 +301,7 @@ Ai thấy tên mới được thì thả tim, ai có ý khác thì bình luận 
     <div class="bar-ctl">
       <div class="row" id="lens"></div>
       <div class="row">
+        <button class="chip" id="onlyAll" type="button" aria-pressed="true">Chỉ tên cho mọi người</button>
         <button class="chip" id="onlyFree" type="button" aria-pressed="false">Chỉ tên chưa ai dùng</button>
         <button class="chip" id="onlyStar" type="button" aria-pressed="false">Chỉ món đã gọi</button>
         <input id="q" type="search" placeholder="Tìm tên…" aria-label="Tìm tên">
@@ -315,7 +318,7 @@ Ai thấy tên mới được thì thả tim, ai có ý khác thì bình luận 
   <section aria-labelledby="h-rej">
     <div class="shead">
       <p class="lbl">Món đã gạch khỏi thực đơn</p>
-      <h2 id="h-rej">12 tên bị loại và lý do</h2>
+      <h2 id="h-rej">13 tên bị loại và lý do</h2>
     </div>
     <div class="rej" id="rej"></div>
   </section>
@@ -425,16 +428,26 @@ const PICKS=[
  ["Hội Lười Nhưng Muốn Giàu","Đại chúng nhất","var(--sun)","Rộng nhất, dễ kéo người vào. Dẫn sang AI bằng series \"Lười đúng cách\"."],
  ["Việc Hôm Nay Để Mai Tính","Chơi chữ hay nhất","var(--leaf)","Bẻ câu ai cũng thuộc: \"để mai tính\", hay \"để máy tính\"."],
  ["Hội Tin Việc Sẽ Tự Xong","Gây tò mò nhất","var(--sky)","Công thức nhóm bò biết bay. Đùa trước, rồi cho thấy việc tự xong là có thật."],
- ["Làm Chủ Mà Như Làm Mọi","Đúng tệp khách nhất","var(--tomato)","Nhắm thẳng chủ doanh nghiệp: lớn chậm hơn nhưng người vào đúng khách."]
+ ["Xóm Lười","Ngắn nhất","var(--tomato)","Ba chữ, dễ nhớ, ai cũng thấy mình trong đó. Sau này thành \"Xóm Lười AI\"."]
 ];
 // [tên hôm nay, tên sau này, cách, đã kiểm tra chưa trùng, ghi chú, đề xuất]
-const KINDS={them:"+ AI",nho:"+ Nhờ AI",cung:"+ Cùng AI",doi:"Đổi 1 chữ"};
+const KINDS={them:"+ AI",nho:"+ Nhờ AI",cung:"+ Cùng AI",doi:"Đổi 1 chữ",hoa:"Viết hoa Ai"};
+// Tên chỉ hợp một tệp người: ẩn khi bật "Chỉ tên cho mọi người"
+const NARROW={};
+[["người đi làm",["Tan Ca Đúng Giờ Là Đỉnh Cao","Hội Không Muốn Tăng Ca","Hội Tin Sếp Sẽ Tăng Lương","Được Voi Đòi Lương","Hội Lương Ít Việc Nhiều","Lương Chưa Về Đã Hết","Hội Đếm Ngày Nhận Lương","Tan Ca Đúng Giờ","Về Sớm Mà Việc Vẫn Xong","Xóm Tan Ca Sớm","Đi Làm Nhàn Tênh"]],
+ ["chủ doanh nghiệp, người buôn bán",["Sếp Cũng Được Nghỉ","Nghỉ Tết Mà Shop Vẫn Chạy","Đi Chơi Mà Shop Vẫn Có Đơn","Bán Hàng Nhàn","Buôn Bán Nhàn","Kinh Doanh Nhàn","Làm Ăn Khéo","Làm Chủ Nhàn Tênh","Làm Chủ Mà Vẫn Có Thời Gian"]],
+ ["mẹ bỉm",["Mẹ Bỉm Vẫn Kiếm Được Tiền"]],["người về hưu",["Về Hưu Vẫn Có Thu Nhập"]]
+].forEach(([l,a])=>a.forEach(n=>NARROW[n]=l));
+const narrowOf=(n,angle)=>NARROW[n]||(angle==="chu"?"chủ doanh nghiệp":angle==="dilam"?"người đi làm":"");
 const AIX=[
-["Hội Lười Nhưng Muốn Giàu","Hội Lười Nhưng Muốn Giàu Nhờ AI","nho",1,"Tên đề xuất số 1 từ đầu. Thêm \"Nhờ AI\" là khép lại câu chuyện của nhóm.",1],
+["Hội Lười Nhưng Muốn Giàu","Hội Lười Nhưng Muốn Giàu Nhờ AI","nho",1,"Tên đề xuất số 1 từ đầu. Lưu ý: khi gắn AI sẽ đứng gần nhóm \"Lazy AI - Lười, thích Tối ưu\" (38 nghìn), nên nội dung phải khác họ.",1],
 ["Việc Hôm Nay Để Mai Tính","Việc Hôm Nay Để AI Tính","doi",1,"Lần đổi tên thành một sự kiện để đăng bài, ai cũng cười và nhớ.",1],
 ["Xóm Lười","Xóm Lười AI","them",1,"Ngắn nhất, dễ thành thương hiệu nhất.",1],
 ["Học Thầy Không Tày Học Bạn","Học Thầy Không Tày Học AI","doi",1,"Nguyên câu tục ngữ ai cũng thuộc. Hợp nhóm mọi người chỉ nhau cách làm.",1],
-["Sếp Cũng Được Nghỉ","Sếp Cũng Được Nghỉ Nhờ AI","nho",1,"Nhắm thẳng chủ doanh nghiệp, đúng tệp khách.",1],
+["Ai Cũng Làm Được","AI Cũng Làm Được","hoa",1,"Đúng nghĩa đen \"dành cho tất cả mọi người\". Sau này chỉ viết hoa Ai thành AI, tên không đổi. Gõ \"ai\" Facebook đã hiểu là AI, nên sau này dễ được tìm thấy.",1],
+["Hỏi Ai Bây Giờ","Hỏi AI Bây Giờ","hoa",1,"Câu ai cũng từng thốt ra khi bí. Nhóm hỏi đáp mọi thứ.",0],
+["Có Ai Làm Hộ","Có AI Làm Hộ","hoa",1,"Nhóm nhờ vả, hỏi mẹo. Sau này: AI làm hộ.",0],
+["Sếp Cũng Được Nghỉ","Sếp Cũng Được Nghỉ Nhờ AI","nho",1,"Nhắm thẳng chủ doanh nghiệp, đúng tệp khách.",0],
 ["Hội Khéo Lười","Hội Khéo Lười AI","them",1,"Tìm chữ \"khéo\" sẽ ra nhóm VÉN KHÉO đứng trước.",0],
 ["Hội Rảnh Tay","Hội Rảnh Tay AI","them",1,"Rảnh tay vì có người, có máy làm thay.",0],
 ["Xóm Mẹo","Xóm Mẹo AI","them",1,"Nhóm chia sẻ mẹo, sau là mẹo AI. Gõ tìm dễ lẫn với \"Xóm Mèo\".",0],
@@ -454,7 +467,6 @@ const AIX=[
 ["Hội Tin Việc Sẽ Tự Xong","Hội Tin Việc Sẽ Tự Xong Nhờ AI","nho",1,"Công thức nhóm bò biết bay.",0],
 ["Nhàn Hơn Mỗi Ngày","Nhàn Hơn Mỗi Ngày Nhờ AI","nho",1,"Tích cực, cô chú lớn tuổi dễ thích.",0],
 ["Có Thời Gian Cho Gia Đình","Có Thời Gian Cho Gia Đình Nhờ AI","nho",0,"Chạm đúng 8x9x và trung niên.",0],
-["Bớt Việc Mỗi Ngày","Bớt Việc Mỗi Ngày Nhờ AI","nho",0,"",0],
 ["Tan Ca Đúng Giờ","Tan Ca Đúng Giờ Nhờ AI","nho",0,"",0],
 ["Về Sớm Mà Việc Vẫn Xong","Về Sớm Mà Việc Vẫn Xong Nhờ AI","nho",0,"",0],
 ["Nghỉ Tết Mà Shop Vẫn Chạy","Nghỉ Tết Mà Shop Vẫn Chạy Nhờ AI","nho",0,"Đúng tệp chủ shop.",0],
@@ -480,6 +492,7 @@ const AIX=[
 ["Không Biết Thì Hỏi Google","Không Biết Thì Hỏi AI","doi",0,"Câu cửa miệng mọi lứa.",0]
 ];
 const REJ=[
+ ["Bớt Việc Mỗi Ngày (Nhờ AI)","Quá gần nhóm có sẵn \"Bớt Việc Cùng AI\" 28 nghìn thành viên."],
  ["Chill Mà Vẫn Có Tiền","Từ lóng, người lớn tuổi không quen."],
  ["Lazy But Rich","Tiếng Anh."],["Work Smart Hội","Tiếng Anh."],["Work Less Earn More","Tiếng Anh."],
  ["Khum Muốn Đi Làm Nhưng Muốn Có Tiền","Teencode, lại quá dài."],
@@ -510,7 +523,7 @@ const fmt=v=>v<.1?"≈0":String(v).replace(".",",");
 let star=new Set();
 try{star=new Set(JSON.parse(localStorage.getItem("hpbTenNhom")||"[]"))}catch(e){}
 const save=()=>{try{localStorage.setItem("hpbTenNhom",JSON.stringify([...star]))}catch(e){}};
-const st={len:"all",free:false,onlyStar:false,q:""};
+const st={len:"all",free:false,onlyStar:false,q:"",all:true};
 
 document.getElementById("chart").innerHTML=BARS.map(([n,t,v,c])=>`<div class="bar"><span class="nm" title="${esc(n)}">${esc(n)} <small>· ${t}</small></span><span class="trk"><span class="fl" style="width:${v/34*100}%;background:${c}"></span></span><span class="v">${fmt(v)}</span></div>`).join("")+
  `<p class="cap">Nhóm gắn mác GenZ đông mà gần như không ai nói gì. 8x9x và trung niên mới giữ nhóm sống, và họ cũng là tuổi của phần lớn chủ doanh nghiệp nhỏ.</p>`;
@@ -525,12 +538,12 @@ lens.addEventListener("click",e=>{const b=e.target.closest("[data-len]");if(!b)r
 
 function render(){
   const q=st.q.toLowerCase().trim();
-  const list=N.filter(([n,,,f])=>(st.len==="all"||lenOf(n)===st.len)&&(!st.free||f)&&(!st.onlyStar||star.has(n))&&(!q||n.toLowerCase().includes(q)));
+  const list=N.filter(([n,a,,f])=>(!st.all||!narrowOf(n,a))&&(st.len==="all"||lenOf(n)===st.len)&&(!st.free||f)&&(!st.onlyStar||star.has(n))&&(!q||n.toLowerCase().includes(q)));
   document.getElementById("count").textContent=`${list.length} / ${N.length} món`;
   const html=Object.entries(COURSES).map(([k,[title,sub]])=>{
     const items=list.filter(x=>x[1]===k);
     if(!items.length)return"";
-    return `<div class="course"><h3><span style="color:${COLORS[k]}">●</span>${title}<span class="n">${items.length} món</span></h3><p class="sub">${sub}</p>${items.map(([n,,ai,f,why])=>`<div class="item${pickSet.has(n)?" rec":""}${star.has(n)?" on":""}" data-item="${esc(n)}"><div class="nmrow"><span class="nm">${esc(n)}</span></div><button class="star" type="button" data-star="${esc(n)}" aria-label="Gọi món ${esc(n)}"></button>${why?`<p class="why">${esc(why)}</p>`:""}<div class="meta">${pickSet.has(n)?'<span class="recb">em đề xuất</span>':""}${f?'<span class="stamp">chưa ai dùng</span>':""}<span>${words(n)} chữ</span>${dots(ai)}</div></div>`).join("")}</div>`;
+    return `<div class="course"><h3><span style="color:${COLORS[k]}">●</span>${title}<span class="n">${items.length} món</span></h3><p class="sub">${sub}</p>${items.map(([n,,ai,f,why])=>`<div class="item${pickSet.has(n)?" rec":""}${star.has(n)?" on":""}" data-item="${esc(n)}"><div class="nmrow"><span class="nm">${esc(n)}</span></div><button class="star" type="button" data-star="${esc(n)}" aria-label="Gọi món ${esc(n)}"></button>${why?`<p class="why">${esc(why)}</p>`:""}<div class="meta">${pickSet.has(n)?'<span class="recb">em đề xuất</span>':""}${f?'<span class="stamp">chưa ai dùng</span>':""}${narrowOf(n,k)?`<span>tệp hẹp: ${narrowOf(n,k)}</span>`:""}<span>${words(n)} chữ</span>${dots(ai)}</div></div>`).join("")}</div>`;
   }).join("");
   document.getElementById("menu").innerHTML=html||`<p class="empty">Không có món nào khớp. Thử bỏ bớt bộ lọc nhé.</p>`;
   sync();
@@ -546,6 +559,7 @@ function sync(){
   const mk=document.getElementById("make");mk.disabled=arr.length<2;mk.title=arr.length<2?"Gọi ít nhất 2 món":"";
 }
 document.addEventListener("click",e=>{const b=e.target.closest("[data-star]");if(!b)return;const n=b.dataset.star;star.has(n)?star.delete(n):star.add(n);save();st.onlyStar?render():sync()});
+document.getElementById("onlyAll").onclick=e=>{st.all=!st.all;e.currentTarget.setAttribute("aria-pressed",st.all);render()};
 document.getElementById("onlyFree").onclick=e=>{st.free=!st.free;e.currentTarget.setAttribute("aria-pressed",st.free);render()};
 document.getElementById("onlyStar").onclick=e=>{st.onlyStar=!st.onlyStar;e.currentTarget.setAttribute("aria-pressed",st.onlyStar);render()};
 document.getElementById("q").oninput=e=>{st.q=e.target.value;render()};
@@ -564,13 +578,14 @@ document.getElementById("copy").onclick=()=>{
 };
 render();
 
-const kf=document.getElementById("kindf");const ak={k:"all"};
+const kf=document.getElementById("kindf");const ak={k:"all",all:true};
+document.getElementById("allAI").onclick=e=>{ak.all=!ak.all;e.currentTarget.setAttribute("aria-pressed",ak.all);renderAI()};
 kf.innerHTML=[["all","Tất cả cách"],...Object.entries(KINDS)].map(([k,v])=>`<button class="chip" type="button" data-kind="${k}" aria-pressed="${k==="all"}">${esc(v)}</button>`).join("");
 kf.addEventListener("click",e=>{const b=e.target.closest("[data-kind]");if(!b)return;ak.k=b.dataset.kind;kf.querySelectorAll("[data-kind]").forEach(x=>x.setAttribute("aria-pressed",x===b));renderAI()});
 const laterHtml=(now,later)=>later.startsWith(now)?`<b>${esc(now)}</b> <em>${esc(later.slice(now.length).trim())}</em>`:`<b>${esc(later).replace(/\bAI\b/,"<em>AI</em>")}</b>`;
 function renderAI(){
-  const list=AIX.filter(x=>ak.k==="all"||x[2]===ak.k).sort((a,b)=>b[5]-a[5]||b[3]-a[3]);
-  document.getElementById("ailist").innerHTML=list.map(([now,later,k,f,why,pk])=>`<article class="ax${pk?" pick":""}${star.has(now)?" on":""}"><button class="star" type="button" data-star="${esc(now)}" aria-label="Gọi món ${esc(now)}"></button><h3 class="now">${esc(now)}</h3><p class="later"><span class="arr">sau này →</span><span>${laterHtml(now,later)}</span></p>${why?`<p class="why">${esc(why)}</p>`:""}<div class="meta">${pk?'<span class="recb">em đề xuất</span>':""}${f?'<span class="stamp">chưa ai dùng</span>':""}<span>${KINDS[k]}</span><span>${words(later)} chữ khi có AI</span></div></article>`).join("");
+  const list=AIX.filter(x=>(ak.k==="all"||x[2]===ak.k)&&(!ak.all||!NARROW[x[0]])).sort((a,b)=>b[5]-a[5]||b[3]-a[3]);
+  document.getElementById("ailist").innerHTML=list.map(([now,later,k,f,why,pk])=>`<article class="ax${pk?" pick":""}${star.has(now)?" on":""}"><button class="star" type="button" data-star="${esc(now)}" aria-label="Gọi món ${esc(now)}"></button><h3 class="now">${esc(now)}</h3><p class="later"><span class="arr">sau này →</span><span>${laterHtml(now,later)}</span></p>${why?`<p class="why">${esc(why)}</p>`:""}<div class="meta">${pk?'<span class="recb">em đề xuất</span>':""}${f?'<span class="stamp">chưa ai dùng</span>':""}${NARROW[now]?`<span>tệp hẹp: ${NARROW[now]}</span>`:""}<span>${KINDS[k]}</span><span>${words(later)} chữ khi có AI</span></div></article>`).join("");
   sync();
 }
 renderAI();
