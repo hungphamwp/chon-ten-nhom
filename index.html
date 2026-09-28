@@ -125,6 +125,47 @@ button{font:inherit}
 .pk .chip{border-color:#D8CFB4;color:var(--paper-ink)}
 .pk .chip[aria-pressed="true"]{background:var(--paper-ink);color:var(--paper);border-color:var(--paper-ink)}
 
+/* ---------- AI later ---------- */
+.ailist{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.ax{position:relative;border:1.5px solid var(--board-line);border-radius:12px;padding:16px 16px 14px;background:rgba(255,255,255,.03);display:grid;gap:8px;align-content:start}
+.ax.pick{border-color:var(--sun);background:rgba(255,201,74,.06)}
+.ax.on{box-shadow:inset 0 0 0 2px var(--sun)}
+.ax .now{font-family:var(--display);font-weight:700;font-size:22px;line-height:1.15;padding-right:48px}
+.ax .later{display:flex;gap:8px;align-items:baseline;font-size:15px;color:var(--chalk-dim);padding-right:40px}
+.ax .later .arr{font-family:var(--hand);color:var(--sky);font-size:20px;flex:none}
+.ax .later b{color:var(--chalk);font-weight:600}
+.ax .later em{font-style:normal;white-space:nowrap;color:var(--board);background:var(--sky);border-radius:4px;padding:0 5px;font-weight:700}
+.ax .why{font-size:13.5px;color:var(--chalk-dim)}
+.ax .meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-size:12.5px;color:var(--chalk-dim)}
+.ax .star{position:absolute;top:12px;right:12px}
+.kinds{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+@media (max-width:900px){.kinds{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.kinds{grid-template-columns:1fr}}
+.kind{border-top:3px solid var(--sky);padding-top:10px;display:grid;gap:4px}
+.kind b{font-family:var(--display);font-size:19px}
+.kind span{font-size:13.5px;color:var(--chalk-dim)}
+.kind code{font-family:var(--hand);font-size:17px;color:var(--sun)}
+
+/* ---------- roadmap ---------- */
+.road{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative;margin-bottom:28px}
+@media (max-width:820px){.road{grid-template-columns:1fr;gap:18px}}
+.step{padding:0 22px 0 0;display:grid;gap:8px;align-content:start}
+.step .no{display:flex;align-items:center;gap:10px}
+.step .no i{width:38px;height:38px;border-radius:50%;background:var(--sun);color:var(--board);display:grid;place-items:center;font-style:normal;font-family:var(--display);font-weight:800;font-size:19px;flex:none}
+.step .no span{font-family:var(--hand);font-size:20px;color:var(--chalk-dim)}
+.step h3{font-size:22px;font-weight:800}
+.step p,.step li{font-size:14px;color:var(--chalk-dim)}
+.step ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.prep{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:760px){.prep{grid-template-columns:1fr}}
+.prep > div{border:1.5px dashed var(--board-line);border-radius:12px;padding:16px 18px}
+.prep h3{font-size:20px;font-weight:800;margin-bottom:8px}
+.prep ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:14px;color:var(--chalk-dim)}
+.prep li b{color:var(--chalk);font-weight:600}
+.sample{margin-top:18px;background:var(--paper);color:var(--paper-ink);border-radius:4px;padding:18px 20px;transform:rotate(-.6deg);box-shadow:0 14px 28px rgba(0,0,0,.3);max-width:680px}
+.sample .hand{color:var(--tomato)}
+.sample p{font-size:14.5px;margin-top:6px;white-space:pre-line}
+
 /* ---------- rejected ---------- */
 .rej{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px 28px}
 .rej p{display:grid;gap:2px}
@@ -160,12 +201,12 @@ button{font:inherit}
     <div>
       <p class="hand">Hôm nay quán có gì?</p>
       <h1>Thực đơn <span class="u">tên nhóm</span></h1>
-      <p class="lede">67 cái tên cho nhóm Facebook đại chúng của HPB. Tiêu chí: <b>có chút cợt nhả</b>, GenZ, 8x9x hay cô chú U60 đọc <b>đều hiểu</b>, và sau này <b>dẫn sang AI</b> mà không phải đổi tên. Bấm ☆ để gọi món, cuối trang có nút soạn sẵn bài cho follower bình chọn.</p>
+      <p class="lede">Hơn 110 cái tên cho nhóm Facebook đại chúng của HPB. Tiêu chí: <b>có chút cợt nhả</b>, GenZ, 8x9x hay cô chú U60 đọc <b>đều hiểu</b>, và sau này <b>dẫn sang AI</b> mà không phải đổi tên. Bấm ☆ để gọi món, cuối trang có nút soạn sẵn bài cho follower bình chọn.</p>
     </div>
     <aside class="special" aria-label="Món đặc biệt">
       <p class="hand">Món đặc biệt hôm nay</p>
       <h2>Hội Lười Nhưng Muốn Giàu</h2>
-      <p>Rộng nhất, ai đọc cũng thấy mình trong đó. Chỉ cần một series "Lười đúng cách: việc này tôi để máy làm" là thành nội dung AI.</p>
+      <p>Rộng nhất, ai đọc cũng thấy mình trong đó. Sau này chỉ cần thêm hai chữ: <b>Hội Lười Nhưng Muốn Giàu Nhờ AI</b>.</p>
       <div class="row" style="margin-top:14px;justify-content:space-between">
         <span class="dots" aria-label="Dẫn sang AI: tốt"><i class="on"></i><i class="on"></i><i></i></span>
         <span style="font-size:13px;color:var(--paper-mute)">5 chữ · chưa ai dùng</span>
@@ -196,6 +237,58 @@ button{font:inherit}
       <h2 id="h-pick">Bốn món em đề xuất</h2>
     </div>
     <div class="picks" id="picks"></div>
+  </section>
+
+  <section aria-labelledby="h-ai">
+    <div class="shead">
+      <p class="lbl">Món nâng cấp · cập nhật 28/09</p>
+      <h2 id="h-ai">Hôm nay → Mai có AI</h2>
+      <p>Tên chạy được ngay hôm nay, sau này chỉ cần gắn thêm chữ AI mà tên cũ gần như giữ nguyên. Có 4 cách gắn.</p>
+    </div>
+    <div class="kinds">
+      <div class="kind"><b>Thêm " AI"</b><span>Tên là một "địa điểm" (xóm, hội, quán), gắn AI nghe như thương hiệu nâng cấp.</span><code>Xóm Lười → Xóm Lười AI</code></div>
+      <div class="kind" style="border-color:var(--leaf)"><b>Thêm " Nhờ AI"</b><span>Tên là một mong ước. "Nhờ AI" trả lời câu hỏi "bằng cách nào?".</span><code>Lười Mà Giàu → … Nhờ AI</code></div>
+      <div class="kind" style="border-color:var(--tomato)"><b>Thêm " Cùng AI"</b><span>Tên là một cách làm, AI thành bạn đồng hành.</span><code>Làm Nhàn → Làm Nhàn Cùng AI</code></div>
+      <div class="kind" style="border-color:var(--sun)"><b>Đổi 1 chữ</b><span>Bẻ tục ngữ, thay đúng một chữ bằng "AI". Người cũ đọc là cười.</span><code>Để Mai Tính → Để AI Tính</code></div>
+    </div>
+    <div class="bar-ctl" style="position:static;border:0;padding:0;margin-bottom:18px">
+      <div class="row" id="kindf"></div>
+    </div>
+    <div class="ailist" id="ailist"></div>
+  </section>
+
+  <section aria-labelledby="h-road">
+    <div class="shead">
+      <p class="lbl">Gợi ý thực hiện</p>
+      <h2 id="h-road">Khi nào và cách gắn chữ AI vào tên</h2>
+      <p>Đổi tên đúng lúc thì thành viên thấy nhóm lên đời. Đổi sớm quá thì bị coi là đổi chủ đề, người ta rời nhóm.</p>
+    </div>
+    <div class="road">
+      <div class="step"><div class="no"><i>1</i><span>Tháng 1–3</span></div><h3>Dùng tên gốc</h3><ul><li>Khoảng 80% bài là chủ đề chung của nhóm: tiền, việc, mẹo nhàn.</li><li>20% là mẹo "để máy làm", chưa cần nhắc nhiều chữ AI.</li><li>Mỗi sáng đăng một câu hỏi mở để tạo thói quen bình luận.</li></ul></div>
+      <div class="step"><div class="no"><i>2</i><span>Tháng 4–6</span></div><h3>Mở series cố định</h3><ul><li>Ví dụ "Lười đúng cách", "Để AI tính": mỗi tuần 2–3 bài, cùng một khung.</li><li>Nâng nội dung máy, AI lên khoảng 30%.</li><li>Để ý xem bài nào có nhiều bình luận hỏi "làm sao".</li></ul></div>
+      <div class="step"><div class="no"><i>3</i><span>Khi đủ tín hiệu</span></div><h3>Gắn chữ AI vào tên</h3><ul><li>Đủ 3 tín hiệu: khoảng 30% bài có chủ đề AI, thành viên tự đăng hỏi về AI mỗi tuần, bài AI có bình luận ngang bài thường.</li><li>Đăng bài báo trước 3–5 ngày, ghim lên đầu nhóm, hỏi ý kiến mọi người.</li><li>Đổi tên xong thì đổi luôn ảnh bìa.</li></ul></div>
+    </div>
+    <div class="prep">
+      <div><h3>Chuẩn bị ngay từ ngày đầu</h3><ul>
+        <li><b>Đường link nhóm để trung tính,</b> không có chữ AI (ví dụ /groups/xomluoi). Đổi tên sau này, link vẫn giữ nguyên.</li>
+        <li><b>Ảnh bìa chừa một khoảng trống</b> để sau này thêm chữ AI mà không phải làm lại.</li>
+        <li><b>Mô tả nhóm có sẵn một câu</b> kiểu "làm ít nhờ mẹo, nhờ máy". Khi đổi tên, không ai thấy lạ.</li>
+        <li><b>Tên sau khi thêm AI không quá khoảng 8 chữ,</b> để còn đọc được trên điện thoại.</li>
+      </ul></div>
+      <div><h3>Nên tránh</h3><ul>
+        <li><b>Tên kết thúc bằng dấu hỏi hoặc câu dài:</b> gắn AI vào nghe gượng.</li>
+        <li><b>Tên mà thêm AI thì đổi nghĩa</b> hoặc nghe như lừa đảo, ví dụ "Việc Nhẹ Lương Cao AI".</li>
+        <li><b>Đổi tên hai lần.</b> Chỉ gắn AI một lần, rồi giữ tên đó lâu dài.</li>
+        <li><b>Đổi tên đột ngột không báo trước.</b> Thành viên sẽ tưởng nhóm bị bán hoặc chuyển sang bán hàng.</li>
+      </ul></div>
+    </div>
+    <div class="sample">
+      <p class="hand">Mẫu bài báo trước khi đổi tên</p>
+      <p>Xóm mình lười lên level rồi cả nhà ơi!
+Mấy tháng nay bài "để máy làm hộ" được hỏi nhiều nhất, nên từ thứ Hai tới, xóm đổi tên thành "Xóm Lười AI".
+Chuyện tiền, chuyện việc, mẹo nhàn vẫn như cũ, chỉ thêm AI làm hộ cho đỡ mệt.
+Ai thấy tên mới được thì thả tim, ai có ý khác thì bình luận nhé.</p>
+    </div>
   </section>
 
   <section aria-labelledby="h-menu">
@@ -334,6 +427,58 @@ const PICKS=[
  ["Hội Tin Việc Sẽ Tự Xong","Gây tò mò nhất","var(--sky)","Công thức nhóm bò biết bay. Đùa trước, rồi cho thấy việc tự xong là có thật."],
  ["Làm Chủ Mà Như Làm Mọi","Đúng tệp khách nhất","var(--tomato)","Nhắm thẳng chủ doanh nghiệp: lớn chậm hơn nhưng người vào đúng khách."]
 ];
+// [tên hôm nay, tên sau này, cách, đã kiểm tra chưa trùng, ghi chú, đề xuất]
+const KINDS={them:"+ AI",nho:"+ Nhờ AI",cung:"+ Cùng AI",doi:"Đổi 1 chữ"};
+const AIX=[
+["Hội Lười Nhưng Muốn Giàu","Hội Lười Nhưng Muốn Giàu Nhờ AI","nho",1,"Tên đề xuất số 1 từ đầu. Thêm \"Nhờ AI\" là khép lại câu chuyện của nhóm.",1],
+["Việc Hôm Nay Để Mai Tính","Việc Hôm Nay Để AI Tính","doi",1,"Lần đổi tên thành một sự kiện để đăng bài, ai cũng cười và nhớ.",1],
+["Xóm Lười","Xóm Lười AI","them",1,"Ngắn nhất, dễ thành thương hiệu nhất.",1],
+["Học Thầy Không Tày Học Bạn","Học Thầy Không Tày Học AI","doi",1,"Nguyên câu tục ngữ ai cũng thuộc. Hợp nhóm mọi người chỉ nhau cách làm.",1],
+["Sếp Cũng Được Nghỉ","Sếp Cũng Được Nghỉ Nhờ AI","nho",1,"Nhắm thẳng chủ doanh nghiệp, đúng tệp khách.",1],
+["Hội Khéo Lười","Hội Khéo Lười AI","them",1,"Tìm chữ \"khéo\" sẽ ra nhóm VÉN KHÉO đứng trước.",0],
+["Hội Rảnh Tay","Hội Rảnh Tay AI","them",1,"Rảnh tay vì có người, có máy làm thay.",0],
+["Xóm Mẹo","Xóm Mẹo AI","them",1,"Nhóm chia sẻ mẹo, sau là mẹo AI. Gõ tìm dễ lẫn với \"Xóm Mèo\".",0],
+["Nhàn Hội","Nhàn Hội AI","them",0,"Rất ngắn.",0],
+["Xóm Nhàn","Xóm Nhàn AI","them",0,"",0],
+["Quán Lười","Quán Lười AI","them",0,"",0],
+["Tiệm Lười","Tiệm Lười AI","them",0,"",0],
+["Xóm Làm Khéo","Xóm Làm Khéo AI","them",0,"",0],
+["Hội Làm Ít","Hội Làm Ít AI","them",0,"",0],
+["Hội Tay Ngang","Hội Tay Ngang AI","them",0,"\"Tay ngang\" là người không chuyên. Sau này: người thường tự dùng AI.",0],
+["Chợ Mẹo","Chợ Mẹo AI","them",0,"",0],
+["Nhà Có Trợ Lý","Nhà Có Trợ Lý AI","them",0,"Hôm nay nói chuyện nhờ người, nhờ máy. Sau này là trợ lý AI.",0],
+["Xóm Tan Ca Sớm","Xóm Tan Ca Sớm AI","them",0,"",0],
+["Việc Tự Xong","Việc Tự Xong Nhờ AI","nho",1,"Câu ai cũng từng ước.",0],
+["Lười Mà Giàu","Lười Mà Giàu Nhờ AI","nho",1,"",0],
+["Nhàn Mà Vẫn Có Tiền","Nhàn Mà Vẫn Có Tiền Nhờ AI","nho",1,"",0],
+["Hội Tin Việc Sẽ Tự Xong","Hội Tin Việc Sẽ Tự Xong Nhờ AI","nho",1,"Công thức nhóm bò biết bay.",0],
+["Nhàn Hơn Mỗi Ngày","Nhàn Hơn Mỗi Ngày Nhờ AI","nho",1,"Tích cực, cô chú lớn tuổi dễ thích.",0],
+["Có Thời Gian Cho Gia Đình","Có Thời Gian Cho Gia Đình Nhờ AI","nho",0,"Chạm đúng 8x9x và trung niên.",0],
+["Bớt Việc Mỗi Ngày","Bớt Việc Mỗi Ngày Nhờ AI","nho",0,"",0],
+["Tan Ca Đúng Giờ","Tan Ca Đúng Giờ Nhờ AI","nho",0,"",0],
+["Về Sớm Mà Việc Vẫn Xong","Về Sớm Mà Việc Vẫn Xong Nhờ AI","nho",0,"",0],
+["Nghỉ Tết Mà Shop Vẫn Chạy","Nghỉ Tết Mà Shop Vẫn Chạy Nhờ AI","nho",0,"Đúng tệp chủ shop.",0],
+["Đi Chơi Mà Shop Vẫn Có Đơn","Đi Chơi Mà Shop Vẫn Có Đơn Nhờ AI","nho",0,"",0],
+["Làm Chủ Mà Vẫn Có Thời Gian","Làm Chủ Mà Vẫn Có Thời Gian Nhờ AI","nho",0,"Hơi dài sau khi thêm AI.",0],
+["Mẹ Bỉm Vẫn Kiếm Được Tiền","Mẹ Bỉm Vẫn Kiếm Được Tiền Nhờ AI","nho",0,"Tệp mẹ bỉm rất đông trên Facebook.",0],
+["Về Hưu Vẫn Có Thu Nhập","Về Hưu Vẫn Có Thu Nhập Nhờ AI","nho",0,"Tệp trung niên, U60.",0],
+["Tuổi Nào Cũng Làm Được","Tuổi Nào Cũng Làm Được Nhờ AI","nho",0,"Người lớn tuổi thấy được khích lệ.",0],
+["Hội Tin Mai Sẽ Rảnh","Hội Tin Mai Sẽ Rảnh Nhờ AI","nho",0,"",0],
+["Làm Nhàn","Làm Nhàn Cùng AI","cung",1,"Rất ngắn, dễ nhớ.",0],
+["Làm Ăn Khéo","Làm Ăn Khéo Cùng AI","cung",1,"\"Làm ăn\" là chữ quen với người kinh doanh lớn tuổi.",0],
+["Kinh Doanh Nhàn","Kinh Doanh Nhàn Cùng AI","cung",0,"",0],
+["Buôn Bán Nhàn","Buôn Bán Nhàn Cùng AI","cung",0,"",0],
+["Bán Hàng Nhàn","Bán Hàng Nhàn Cùng AI","cung",0,"",0],
+["Làm Chủ Nhàn Tênh","Làm Chủ Nhàn Tênh Cùng AI","cung",0,"",0],
+["Đi Làm Nhàn Tênh","Đi Làm Nhàn Tênh Cùng AI","cung",0,"",0],
+["Sống Nhàn","Sống Nhàn Cùng AI","cung",0,"",0],
+["Làm Giàu Từ Từ","Làm Giàu Từ Từ Cùng AI","cung",0,"",0],
+["Học Nghề Mới","Học Nghề Mới Cùng AI","cung",0,"",0],
+["Có Khó Có Máy Lo","Có Khó Có AI Lo","doi",1,"Bẻ câu \"có khó mới có miếng ăn\".",0],
+["Máy Làm Ta Chơi","AI Làm Ta Chơi","doi",1,"",0],
+["Nhờ Người Không Bằng Nhờ Máy","Nhờ Người Không Bằng Nhờ AI","doi",0,"",0],
+["Không Biết Thì Hỏi Google","Không Biết Thì Hỏi AI","doi",0,"Câu cửa miệng mọi lứa.",0]
+];
 const REJ=[
  ["Chill Mà Vẫn Có Tiền","Từ lóng, người lớn tuổi không quen."],
  ["Lazy But Rich","Tiếng Anh."],["Work Smart Hội","Tiếng Anh."],["Work Less Earn More","Tiếng Anh."],
@@ -394,7 +539,7 @@ function sync(){
   document.querySelectorAll("[data-star]").forEach(b=>{
     const on=star.has(b.dataset.star);b.setAttribute("aria-pressed",on);
     b.textContent=b.classList.contains("star")?(on?"★":"☆"):(on?"★ Đã gọi":"☆ Gọi món");
-    const it=b.closest(".item");if(it)it.classList.toggle("on",on);
+    const it=b.closest(".item, .ax");if(it)it.classList.toggle("on",on);
   });
   const arr=[...star];
   document.getElementById("dockList").innerHTML=arr.length?`<span class="hand">Đã gọi ${arr.length} món:</span>${arr.map(esc).join(" · ")}`:`<span class="hand">Chưa gọi món nào.</span>Bấm ☆ cạnh tên anh thích.`;
@@ -418,6 +563,17 @@ document.getElementById("copy").onclick=()=>{
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t.value).then(()=>msg.textContent="Đã sao chép.",fallback)}else fallback();
 };
 render();
+
+const kf=document.getElementById("kindf");const ak={k:"all"};
+kf.innerHTML=[["all","Tất cả cách"],...Object.entries(KINDS)].map(([k,v])=>`<button class="chip" type="button" data-kind="${k}" aria-pressed="${k==="all"}">${esc(v)}</button>`).join("");
+kf.addEventListener("click",e=>{const b=e.target.closest("[data-kind]");if(!b)return;ak.k=b.dataset.kind;kf.querySelectorAll("[data-kind]").forEach(x=>x.setAttribute("aria-pressed",x===b));renderAI()});
+const laterHtml=(now,later)=>later.startsWith(now)?`<b>${esc(now)}</b> <em>${esc(later.slice(now.length).trim())}</em>`:`<b>${esc(later).replace(/\bAI\b/,"<em>AI</em>")}</b>`;
+function renderAI(){
+  const list=AIX.filter(x=>ak.k==="all"||x[2]===ak.k).sort((a,b)=>b[5]-a[5]||b[3]-a[3]);
+  document.getElementById("ailist").innerHTML=list.map(([now,later,k,f,why,pk])=>`<article class="ax${pk?" pick":""}${star.has(now)?" on":""}"><button class="star" type="button" data-star="${esc(now)}" aria-label="Gọi món ${esc(now)}"></button><h3 class="now">${esc(now)}</h3><p class="later"><span class="arr">sau này →</span><span>${laterHtml(now,later)}</span></p>${why?`<p class="why">${esc(why)}</p>`:""}<div class="meta">${pk?'<span class="recb">em đề xuất</span>':""}${f?'<span class="stamp">chưa ai dùng</span>':""}<span>${KINDS[k]}</span><span>${words(later)} chữ khi có AI</span></div></article>`).join("");
+  sync();
+}
+renderAI();
 </script>
 </body>
 </html>
