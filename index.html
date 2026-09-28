@@ -166,6 +166,23 @@ button{font:inherit}
 .sample .hand{color:var(--tomato)}
 .sample p{font-size:14.5px;margin-top:6px;white-space:pre-line}
 
+/* ---------- directions ---------- */
+.dirs{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
+.dir{border:1.5px solid var(--board-line);border-radius:14px;padding:18px;display:grid;gap:10px;align-content:start;background:rgba(255,255,255,.025)}
+.dir .top{display:grid;gap:2px}
+.dir h3{font-size:23px;font-weight:800}
+.dir .aud{font-family:var(--hand);font-size:17px;color:var(--sun)}
+.dir .idea{font-size:14px;color:var(--chalk-dim)}
+.dir .posts{margin:0;padding-left:18px;font-size:13.5px;color:var(--chalk-dim);display:grid;gap:3px}
+.dir .posts li::marker{color:var(--leaf)}
+.dir .nms{display:grid;gap:8px;border-top:1px dashed var(--board-line);padding-top:10px}
+.dn{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center}
+.dn .a{font-family:var(--display);font-weight:700;font-size:18px;line-height:1.2}
+.dn .b{grid-column:1;font-size:13px;color:var(--chalk-dim)}
+.dn .b em{font-style:normal;color:var(--board);background:var(--sky);border-radius:4px;padding:0 5px;font-weight:700;white-space:nowrap}
+.dn .star{grid-row:1/3;grid-column:2;width:34px;height:34px;font-size:16px}
+.dn.on .a{text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:3px;text-underline-offset:4px}
+
 /* ---------- rejected ---------- */
 .rej{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px 28px}
 .rej p{display:grid;gap:2px}
@@ -201,7 +218,7 @@ button{font:inherit}
     <div>
       <p class="hand">Hôm nay quán có gì?</p>
       <h1>Thực đơn <span class="u">tên nhóm</span></h1>
-      <p class="lede">Hơn 140 cái tên cho nhóm Facebook <b>dành cho tất cả mọi người</b> của HPB. Tiêu chí: <b>có chút cợt nhả</b>, GenZ, 8x9x hay cô chú U60 đọc <b>đều hiểu</b>, và sau này <b>dẫn sang AI</b> mà không phải đổi tên. Bấm ☆ để gọi món, cuối trang có nút soạn sẵn bài cho follower bình chọn.</p>
+      <p class="lede">Hơn 170 cái tên, chia theo 12 hướng nhóm, cho nhóm Facebook <b>dành cho tất cả mọi người</b> của HPB. Tiêu chí: <b>có chút cợt nhả</b>, GenZ, 8x9x hay cô chú U60 đọc <b>đều hiểu</b>, và sau này <b>dẫn sang AI</b> mà không phải đổi tên. Bấm ☆ để gọi món, cuối trang có nút soạn sẵn bài cho follower bình chọn.</p>
     </div>
     <aside class="special" aria-label="Món đặc biệt">
       <p class="hand">Món đặc biệt hôm nay</p>
@@ -245,6 +262,15 @@ button{font:inherit}
       <div class="kind" style="border-color:var(--chalk)"><b>Gắn AI vẫn trôi</b><span>Thêm hoặc đổi một chữ là thành tên AI.</span></div>
     </div>
     <div class="picks" id="picks"></div>
+  </section>
+
+  <section aria-labelledby="h-dir">
+    <div class="shead">
+      <p class="lbl">Đa dạng từ chủ đề, không chỉ từ cách đặt tên</p>
+      <h2 id="h-dir">Mười hai hướng nhóm khác nhau</h2>
+      <p>Mỗi hướng là một kiểu nhóm riêng: ai sẽ vào, họ đăng gì, và vài cái tên kèm cách gắn AI về sau. Chọn hướng trước rồi mới chọn tên.</p>
+    </div>
+    <div class="dirs" id="dirs"></div>
   </section>
 
   <section aria-labelledby="h-ai">
@@ -326,7 +352,7 @@ Ai thấy tên mới được thì thả tim, ai có ý khác thì bình luận 
   <section aria-labelledby="h-rej">
     <div class="shead">
       <p class="lbl">Món đã gạch khỏi thực đơn</p>
-      <h2 id="h-rej">15 tên bị loại và lý do</h2>
+      <h2 id="h-rej">17 tên bị loại và lý do</h2>
     </div>
     <div class="rej" id="rej"></div>
   </section>
@@ -536,7 +562,24 @@ const AIX=[
 ["Nhờ Người Không Bằng Nhờ Máy","Nhờ Người Không Bằng Nhờ AI","doi",0,"",0],
 ["Không Biết Thì Hỏi Google","Không Biết Thì Hỏi AI","doi",0,"Câu cửa miệng mọi lứa.",0]
 ];
+// Hướng nhóm: [tên hướng, ai vào, ý tưởng, [bài mẫu], [[tên, sau này, đã kiểm tra, ghi chú]]]
+const DIRS=[
+["Xưa và nay","8x9x, trung niên","Hoài niệm ngày xưa, so với bây giờ. Tệp này bình luận nhiều nhất trong khảo sát (34 bình luận / 1.000 thành viên mỗi ngày).",["Hồi đó chưa có điện thoại, hẹn nhau kiểu gì?","Món đồ ngày xưa nhà bạn còn giữ tới giờ?"],[["Hồi Đó Chưa Có","Hồi Đó Chưa Có AI",1,"Sau này thêm AI là câu tự trọn nghĩa."],["Ngày Xưa Và Bây Giờ","Ngày Xưa Và Bây Giờ Có AI",0,"Đã có nhóm gần giống \"Xưa Và Nay\" 4,3 nghìn."],["Hồi Đó Làm Tay","Hồi Đó Làm Tay, Giờ Có AI",0,""]]],
+["Con chỉ ba mẹ","Mọi nhà, mọi lứa","Con cháu chỉ ông bà, ba mẹ dùng điện thoại, Zalo, chuyển khoản. Chuyện vừa hài vừa thương.",["Ba mẹ bạn từng hỏi câu công nghệ nào làm bạn cười?","Mẹo chỉ ba mẹ gọi video không bị lộn"],[["Chỉ Ba Mẹ Dùng Điện Thoại","Chỉ Ba Mẹ Dùng AI",1,"Đổi 2 chữ, cảm xúc gia đình rất mạnh."],["Con Chỉ Mẹ Làm","Con Chỉ Mẹ Dùng AI",0,""]]],
+["Học không bao giờ muộn","Trung niên, U60, người muốn đổi nghề","Người lớn tuổi học cái mới: lái xe, bơi, tiếng Anh, điện thoại. Rất tích cực, dễ lan.",["Năm nay bạn học được gì mới dù đã ngoài 40?","Kể chuyện người thân học cái mới ở tuổi 60"],[["Học Gì Cũng Không Muộn","Học AI Cũng Không Muộn",1,"Người lớn tuổi thấy được khích lệ."],["Tuổi Nào Cũng Làm Được","Tuổi Nào Cũng Làm Được Nhờ AI",0,""]]],
+["Tự tay làm lấy","Mọi lứa, người thích tiết kiệm","Tự sửa đồ, tự nấu, tự trang trí, tự làm thiệp. Bài khoe thành quả kèm ảnh, rất dễ có tương tác.",["Khoe món đồ bạn tự sửa được, khỏi phải thuê thợ","Lần tự làm lấy thất bại nhất của bạn"],[["Tự Làm Lấy","Tự Làm Lấy Cùng AI",1,""],["Tự Tay Làm","Tự Tay Làm Cùng AI",0,""]]],
+["Đố vui, thử trí","Mọi lứa, học sinh tới ông bà","Câu đố mẹo, câu hỏi hóc búa. Sau này thành trò \"người đấu với AI\".",["Đố vui hôm nay: …, ai trả lời được?","Câu đố hồi nhỏ bạn nhớ nhất"],[["Đố Mà Biết","Đố AI Biết",1,"Đổi 1 chữ, nghe là thấy trò chơi."],["Hỏi Khó Đáp Vui","Hỏi Khó AI Đáp",0,""]]],
+["Bếp nhà, chợ nhà","Người nội trợ, sinh viên, cả nhà","Hôm nay nấu gì, đi chợ sao cho khéo, nấu nhanh mà ngon.",["Mâm cơm tối nay nhà bạn có gì?","Món nấu 15 phút mà cả nhà khen"],[["Nay Nấu Gì","Nay Nấu Gì Hỏi AI",0,"Kiểu gắn mới: thêm \"Hỏi AI\"."],["Đi Chợ Khéo","Đi Chợ Khéo Cùng AI",0,""],["Bếp Nhà Lười","Bếp Nhà Lười AI",0,""]]],
+["Cà phê và nhịp sống","Người đi làm, người về hưu","Sống chậm, có thời gian cho mình. Nhóm mang cảm giác ngồi quán cà phê buổi sáng.",["Nếu mỗi ngày dư 1 tiếng, bạn làm gì?","Ly cà phê sáng nay của bạn ở đâu?"],[["Dư Giờ Uống Cà Phê","Dư Giờ Uống Cà Phê Nhờ AI",1,""],["Sáng Cà Phê Chiều Mẹo","Sáng Cà Phê Chiều AI",0,"Đổi 1 chữ."]]],
+["Hỏi gì cũng được","Mọi lứa","Tên chính là kiểu bài: mọi bài là câu hỏi, cả xóm trả lời. Nhóm tự chạy.",["Bạn đang bí chuyện gì mà chưa biết hỏi ai?","Chỉ nhau một mẹo mà bạn ước biết sớm hơn"],[["Hỏi Ai Bây Giờ","Hỏi AI Bây Giờ",1,""],["Ai Biết Chỉ Với","AI Biết Chỉ Với",1,""],["Việc Gì Khó Có Xóm Lo","Việc Gì Khó Có AI Lo",1,""]]],
+["Tiền nong vừa vặn","Mọi lứa, đặc biệt gia đình trẻ","Chi tiêu, tiết kiệm, tính toán có số cụ thể, giống Liệu Cơm Gắp Mắm nhưng nhẹ nhàng hơn.",["Nhà 4 người, 20 triệu một tháng, chia sao cho đủ?","Món chi tiêu bạn cắt được mà không tiếc"],[["Tính Sao Cho Vừa","Tính Sao Cho Vừa Nhờ AI",0,"Chữ \"tính\" gợi luôn \"máy tính\"."],["Chi Tiêu Khéo","Chi Tiêu Khéo Cùng AI",0,""],["Tà Tà Mà Giàu","Tà Tà Mà Giàu Nhờ AI",0,""]]],
+["Tự trào, kể chuyện ngố","Mọi lứa, người trẻ thích nhất","Kể chuyện mình ngố, quên trước quên sau, thông minh đột xuất. Hài mà không ai bị chạm tự ái.",["Kể lần bạn thông minh đột xuất nhất","Bạn từng quên thứ gì \"kinh điển\" nhất?"],[["Hội Thông Minh Đột Xuất","Hội Thông Minh Đột Xuất Nhờ AI",1,""],["Não Cá Vàng","Não Cá Vàng Nhờ AI",0,"AI nhớ hộ."]]],
+["Khỏe kiểu nhàn","Trung niên, dân văn phòng","Giữ sức khỏe mà không cần cố: ngủ đủ, ăn đủ, vận động vừa sức.",["Thói quen nhỏ giúp bạn khỏe hơn năm nay","Bạn ngủ mấy tiếng một đêm?"],[["Khỏe Mà Không Cần Cố","Khỏe Mà Không Cần Cố Nhờ AI",0,""],["Ngủ Đủ Giấc","Ngủ Đủ Giấc Nhờ AI",0,""]]],
+["Khoe việc nhỏ làm được","Mọi lứa","Mỗi ngày khoe một việc nhỏ làm xong. Không khí tích cực, dễ giữ người.",["Hôm nay bạn làm xong việc gì, dù nhỏ?","Việc bạn trì hoãn cả tháng, cuối cùng đã làm"],[["Hôm Nay Làm Được Gì","Hôm Nay AI Làm Được Gì",0,"Đổi chỗ 1 chữ."],["Hội Thích Thử","Hội Thích Thử AI",1,""],["Hội Học Lỏm","Hội Học Lỏm AI",1,""]]]
+];
 const REJ=[
+ ["Biết Tuốt","Đã có \"Mẹ Biết Tuốt\" 70 nghìn và nhiều nhóm rao vặt cùng tên."],
+ ["Nhà Gọn Người Nhàn","Gần nhóm \"Nhà gọn sống thông minh\" 53 nghìn."],
  ["Tiệm Tạp Hóa Mẹo","Tìm chữ \"tạp hóa\" toàn ra nhóm chủ tiệm tạp hóa 137–378 nghìn, nhóm anh bị chìm."],
  ["Nhanh Gọn Lẹ","Tìm ra toàn nhóm ship hàng, mở thẻ tín dụng, dễ bị xem là nhóm rác."],
  ["Bớt Việc Mỗi Ngày (Nhờ AI)","Quá gần nhóm có sẵn \"Bớt Việc Cùng AI\" 28 nghìn thành viên."],
@@ -599,7 +642,7 @@ function sync(){
   document.querySelectorAll("[data-star]").forEach(b=>{
     const on=star.has(b.dataset.star);b.setAttribute("aria-pressed",on);
     b.textContent=b.classList.contains("star")?(on?"★":"☆"):(on?"★ Đã gọi":"☆ Gọi món");
-    const it=b.closest(".item, .ax");if(it)it.classList.toggle("on",on);
+    const it=b.closest(".item, .ax, .dn");if(it)it.classList.toggle("on",on);
   });
   const arr=[...star];
   document.getElementById("dockList").innerHTML=arr.length?`<span class="hand">Đã gọi ${arr.length} món:</span>${arr.map(esc).join(" · ")}`:`<span class="hand">Chưa gọi món nào.</span>Bấm ☆ cạnh tên anh thích.`;
@@ -636,6 +679,10 @@ function renderAI(){
   sync();
 }
 renderAI();
+
+const hl=(now,later)=>later.startsWith(now)?`${esc(now)} <em>${esc(later.slice(now.length).replace(/^,?\s*/,""))}</em>`:esc(later).replace(/\bAI\b/,"<em>AI</em>");
+document.getElementById("dirs").innerHTML=DIRS.map(([t,aud,idea,posts,nms])=>`<article class="dir"><div class="top"><h3>${esc(t)}</h3><span class="aud">${esc(aud)}</span></div><p class="idea">${esc(idea)}</p><ul class="posts">${posts.map(x=>`<li>${esc(x)}</li>`).join("")}</ul><div class="nms">${nms.map(([n,l,f,note])=>`<div class="dn${star.has(n)?" on":""}"><span class="a">${esc(n)}</span><button class="star" type="button" data-star="${esc(n)}" aria-label="Gọi món ${esc(n)}"></button><span class="b">sau này → ${hl(n,l)}${f?' · <span class="stamp" style="font-size:13px">chưa ai dùng</span>':""}${note?" · "+esc(note):""}</span></div>`).join("")}</div></article>`).join("");
+sync();
 </script>
 </body>
 </html>
